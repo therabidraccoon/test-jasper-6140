@@ -15,15 +15,18 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class JasperService {
 
-	
-	public void getJasperPrint(List<Automobile> beans, String jasperFileName)
-			throws Exception {
+	public void getJasperPrint(List<Automobile> beans, String jasperFileName) throws Exception {
+
 		JRDataSource jasperBeans = new JRBeanCollectionDataSource(beans, true);
+
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put(JRParameter.REPORT_LOCALE, Locale.ITALY);
+
 		jasperFileName = jasperFileName + ".jasper";
+
 		InputStream report = this.getClass().getClassLoader().getResourceAsStream(jasperFileName);
 		JasperPrint print = JasperFillManager.fillReport(report, parameters, jasperBeans);
-		JasperExportManager.exportReportToPdfFile(print, "C:/TEMP/testDiOggi.pdf");
+
+		JasperExportManager.exportReportToPdfFile(print, "C:/TEMP/JASPER/testDiOggi.pdf");
 	}
 }
